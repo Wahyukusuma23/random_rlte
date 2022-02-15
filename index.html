@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        
+  .item-desc{
+    padding: 0 15px;
+    margin: 1rem 15px;
+    border-left: 2px solid red;
+    font-family: noasarck;
+  }
+  .item-desc h4{
+    font-family: noasarck;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    letter-spacing: 2px; 
+  }
+  .legend td{
+    font-size: 1.7rem;
+letter-spacing: 1px;
+  }
+  .inner-notif{
+    text-align: center
+  }
+  .inner-notif form{
+    display: inline-block;
+    width: 45%;
+  }
+  .msg-rmn{
+    font-size: 1.5rem;
+    margin: 3rem 0;
+    border-top: 1px solid;
+    padding-top: 3rem;
+  }
+  .btn-modal{
+    width: 100%;
+    background: none;
+    padding: 4px 0px;
+    transition: .3s all;
+  }
+  .btn-modal:hover{
+    background: #8a0c0c;
+  }
+  #statement{
+    font-family: Noasarck;
+    font-size: 3.5rem;
+  }
+  .reward-name{
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-family: noasarck;
+    letter-spacing: 1.5px;
+  }
+  .hidden {
+    display: none;
+  }
+  .visuallyhidden {
+    opacity: 0;
+  }
+  .combine{
+    position: relative;
+    width: 100%;
+    height: 540px;
+    display: flex;
+    justify-content: center;
+  }
+  canvas#canvas{
+      max-width: 97vw;
+      position: absolute;
+      z-index: 1
+  }
+  input#spin{
+    display: table;
+    background: #8a0c0c;
+    padding: 1rem 4rem;
+    margin: 2% 0 0 0;
+    z-index: 3;
+    height: 5rem;
+    top: calc(50% - 5rem);
+    position: relative;
+    text-transform: uppercase;
+    border: 1px solid #aaa7ae;
+    border-radius: 2.5rem;
+  }
+  #myModal .modal-dialog .modal-header{
+      border-bottom:none
+  }
+  #myModal .modal-dialog .modal-content{
+    background: black
+  }
+  /* countdown */
+  html {
+    background: #1B2335;
+  }
+
+  .container_countdown {
+    width: 648px;
+    height: 540px;
+    margin: auto;
+    padding: 0px;
+    background: radial-gradient(circle, #283149 20%, #283149 5%, #000  75%);
+    position: absolute;
+    z-index: 2;
+    transition: all 1s linear;
+  }
+
+  .square {
+    width: 50px;
+    height: 50px;
+    /* border: 1px solid #1B2335; */
+    float: left;
+    text-align: center;
+    color: #121824;
+    line-height: 50px;
+    padding: 1px;
+    -webkit-perspective: 800px;
+            perspective: 800px;
+  }
+
+  .sqrInside {
+    width: 45px;
+    height: 45px;
+    -webkit-transition: all 1sec ease;
+    transition: all 1sec ease;
+    background: transparent;
+  }
+
+  .sqrRotate {
+    background: #EF7B94;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 1s;
+    transition: -webkit-transform 1s;
+    transition: transform 1s;
+    transition: transform 1s, -webkit-transform 1s;
+    -webkit-transform: rotateY(180deg);
+  }
+
+  .sqrYellowToOrange {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(90%, #FFF0BE), color-stop(10%, #EF7B94));
+    background: linear-gradient(#FFF0BE 90%, #EF7B94 10%);
+    -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+    animation: neon1 1.5s ease-in-out infinite alternate;
+    webkit-box-shadow: 20px 20px 50px 20px white;
+  }
+
+  .sqrYellowToOrange {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(90%, #EF7B94), color-stop(10%, #EF7B94));
+    background: linear-gradient(#EF7B94 90%, #EF7B94 10%);
+  }
+
+  .sqrOrangeToPurple {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #EF7B94), color-stop(99%, #7F2A83));
+    background: linear-gradient(#EF7B94 1%, #7F2A83 99%);
+  }
+
+  .sqrRotateRev {
+    background: transparent;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+    -webkit-transition: -webkit-transform 1s;
+    transition: -webkit-transform 1s;
+    transition: transform 1s;
+    transition: transform 1s, -webkit-transform 1s;
+    -webkit-transform: rotateY(150deg);
+  }
+
+  .badgeCont {
+    width: 200px;
+    margin-left: 50px;
+    margin-top: 50px;
+    padding: 0px;
+    -webkit-transform: rotate(180deg);
+    display: -webkit-flex;
+  }
+
+  .tryBefore {
+    background: #EF7B94;
+    width: 50px;
+    height: 50px;
+  }
+
+  .tryBefore::after {
+    content: "";
+    display: inline-block;
+    background: #EF7B94;
+    width: 35.5px;
+    height: 36px;
+    margin-top: 32px;
+    margin-left: 7px;
+    -webkit-transform: rotate(45deg);
+  }
+/* end of countdown */
+    </style>
+</head>
+<body>
+    <div class="nav-wgra">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar3">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href=""><img src="https://webshop.ranreunion.com/img/master/logo.png" alt="NewRanOnline"></a>
+                </div>
+                <div id="navbar3" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav ">
+                        <li><a href="">HOME</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">COMMUNITY <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="https://forum.wavegame.net/" target="_blank">Forum</a></li>
+                                <li><a href="https://www.facebook.com/NewRanOnline/" target="_blank">Facebook Page</a></li>
+                                <li><a href="https://www.facebook.com/groups/NewRanOnlineIndonesia/" target="_blank">Facebook Group</a></li>
+                                <li><a href="https://t.me/joinchat/D3k6QBZ4avBbetH2OwXh6g" target="_blank">Telegram Group</a></li>
+                                <li><a href="https://discord.gg/WfXnt5q" target="_blank">Discord Group</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">OTHER GAMES <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="https://3kr.wavegame.net" target="_blank"><span class="fa fa-gamepad"></span> 3 Kingdoms Reborn</a></li>
+                                <li><a href="https://alo.wavegame.net" target="_blank"><span class="fa fa-gamepad"></span> Angel Love Online</a></li>
+                                <li><a href="https://3k.wavegame.net" target="_blank"><span class="fa fa-gamepad"></span> 3 Kingdoms Online</a></li>
+                                <li><a href="https://3kclassic.wavegame.net" target="_blank"><span class="fa fa-gamepad"></span> 3 Kingdoms Classic</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="maincontent">
+        <div class="container">
+            <div class="row">
+<div class="combine">
+  <input type="button" value="spin" id='spin' />
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <div class="container_countdown" id="container_countdown">
+    <div id="allSquares"></div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center">
+          <p id="statement"></p>
+          <img src="" id="img-mod">
+          <p class="reward-name"></p>
+          <p style="font-size: 1.4rem;">
+            <span class="msg"></span>
+            <b></b>
+          </p>
+        </div>
+        <div class="inner-notif"></div>
+    </div>
+  </div>
+</div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="js/ranonline.wavegame.js"></script>
+    <script>
+        
+    var formcontent = `
+        <form action="" method="get" id="goback">
+            <input type="hidden" name="master_id" value="" placeholder="Enter Master ID">
+            </form>
+        `;
+    $('body').append(formcontent);
+    $(function () {
+        if (window.history && window.history.pushState) {
+            window.history.pushState('', null, '');
+            $(window).on('popstate', function (id) {
+                $('#goback').submit();
+            });
+        }
+    });
+        var response = 5
+    $(document).ready(function() {
+        // FORCE TRIGGER EVENT
+        var timerb;
+        timerb = setTimeout(function () {
+            $('#spin').remove();
+            rotateSqr();
+        }, 4000)
+        $('#spin').on('click', function() {
+            $(this).remove();
+            clearTimeout(timerb);
+            rotateSqr();
+        });
+
+        // COUNTDOWN
+        var arrNumbers = [[30,31,32,44,54,55,56,68,78,79,80],
+                    [30,31,32,44,54,55,56,66,78,79,80],
+                    [31,32,44,56,68,80]]
+      var columns = 12;
+      var rows = 9;
+      var $square = '<div class="square"><div class="sqrInside"></div></div>';
+      var counter = 0;
+      for (var r = 1; r < rows + 1; r++) {
+        for (var c = 1; c < columns + 1; c++) {
+          counter++
+          var $square = '<div class="square" id=sqrCont"' + (counter) + '"><div class="sqrInside"  id="sqr' + counter + '"></div></div>'; //' + counter + '
+          $($square).appendTo('div#allSquares');
+        }
+      }
+      var numero = 0;
+      function rotateSqr() {
+        if (numero >= arrNumbers.length) {
+          numero = 0;
+        }
+        var arrDrawNumber = arrNumbers[numero];
+        for(var block = 26; block < 94; block++){
+          $('#sqr' + block).removeClass('sqrRotate');
+        }
+        for(var num = 0; num < arrDrawNumber.length; num++){
+          $('#sqr' + arrDrawNumber[num]).addClass('sqrRotate');    
+        }
+        numero++;
+        if (numero == 3) {
+          setTimeout(function() {
+            dismissable()
+            setTimeout(function() {
+              rtv()
+            }, 1500)
+          }, 2500)
+        } else {
+          setTimeout(function() {
+              rotateSqr();
+            }, 1500)
+        }
+      }
+
+      // DISMISSING COUNTDOWN
+      let box = document.getElementById('container_countdown')
+      function dismissable() {
+        if (box.classList.contains('hidden')) {
+          box.classList.remove('hidden');
+          setTimeout(function () {
+            box.classList.remove('visuallyhidden');
+          }, 20);
+        } else {
+          box.classList.add('visuallyhidden');    
+          box.addEventListener('transitionend', function(e) {
+            box.classList.add('hidden');
+          }, {
+            capture: false,
+            once: true,
+            passive: false
+          });
+        }
+      }
+    });
+
+    // MR
+    function rtv() {
+            stpr(parseFloat(response))
+    }
+    // WHEEL
+    var options = [
+        'ITEM I',
+        'ITEM II',
+        'ITEM III',
+        'ITEM IV',
+        'ITEM V'
+    ];
+    var img_options = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5'
+    ];
+    var rome = [
+        'I',
+        'II',
+        'III',
+        'IV',
+        'V'
+    ];
+
+    var startAngle = 0;
+    var arc = Math.PI / (options.length / 2);
+    var spinTimeout = null;
+
+    var spinArcStart = 10;
+    var spinTime = 0;
+    var spinTimeTotal = 0;
+
+    var ctx;
+
+    function byte2Hex(n) {
+        var nybHexString = "0123456789ABCDEF";
+        return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+    }
+
+    function RGB2Color(r,g,b) {
+        return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+    }
+
+    function gtc(item, maxitem) {
+        var phase = 0;
+        var center = 128;
+        var width = 127;
+        var frequency = Math.PI*2/maxitem;
+        
+        red   = Math.sin(frequency*item+2+phase) * width + center;
+        green = Math.sin(frequency*item+0+phase) * width + center;
+        blue  = Math.sin(frequency*item+4+phase) * width + center;
+
+        return RGB2Color(red,green,blue);
+    }
+
+    function drwh() {
+        var canvas = document.getElementById("canvas");
+        if (canvas.getContext) {
+            var outsideRadius = 200;
+            var textRadius = 160;
+            var insideRadius = 125;
+
+            ctx = canvas.getContext("2d");
+            ctx.clearRect(0,0,500,500);
+
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 2;
+            ctx.font = 'bold 12px Helvetica, Arial';
+            
+            for(var i = 0; i < options.length; i++) {
+                var angle = startAngle + i * arc;
+                ctx.fillStyle = gtc(i, options.length);
+
+                ctx.beginPath();
+                ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
+                ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
+                ctx.stroke();
+                ctx.fill();
+
+                ctx.save();
+                
+                ctx.shadowOffsetX = -1;
+                ctx.shadowOffsetY = -1;
+                ctx.shadowBlur    = 0;
+                ctx.shadowColor   = "rgb(220,220,220)";
+                ctx.fillStyle = "black";
+                ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
+                              250 + Math.sin(angle + arc / 2) * textRadius);
+                ctx.rotate(angle + arc / 2 + Math.PI / 2);
+                var text = rome[i];
+                ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+                ctx.restore();
+                }
+
+            //Arrow
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
+            ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
+            ctx.lineTo(250 + 4, 250 - (outsideRadius - 5));
+            ctx.lineTo(250 + 9, 250 - (outsideRadius - 5));
+            ctx.lineTo(250 + 0, 250 - (outsideRadius - 13));
+            ctx.lineTo(250 - 9, 250 - (outsideRadius - 5));
+            ctx.lineTo(250 - 4, 250 - (outsideRadius - 5));
+            ctx.lineTo(250 - 4, 250 - (outsideRadius + 5));
+            ctx.fill();
+        }
+    }
+
+    function stpr(time) {
+      spinAngleStart = 10+time;
+      // spinAngleStart = time/100*10 + 30 // 8 items
+      spinTime = 0;
+      spinTimeTotal = 10000;
+      rtwl();
+    }
+
+    function rtwl() {
+        spinTime += 30;
+        if(spinTime >= spinTimeTotal) {
+            strw();
+            return;
+        }
+        var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+        startAngle += (spinAngle * Math.PI / 180);
+        drwh();
+        spinTimeout = setTimeout('rtwl()', 30);
+    }
+
+
+    function strw() {
+        clearTimeout(spinTimeout);
+        var degrees = startAngle * 180 / Math.PI + 90;
+        var arcd = arc * 180 / Math.PI;
+        var index = Math.floor((360 - degrees % 360) / arcd);
+        ctx.save();
+        ctx.font = 'bold 30px Helvetica, Arial';
+        var text = options[index]
+        ctx.restore();
+        ubtr('CNJKDSVNKJ', options[index])
+    }
+    function easeOut(t, b, c, d) {
+        var ts = (t/=d)*t;
+        var tc = ts*t;
+        return b+c*(tc + -3*ts + 3*t);
+    }
+
+    drwh();
+    function ubtr(id_roulette_reward, item){
+        $('#myModal .modal-body #statement').html('Congratulation')
+        $('#myModal .modal-body .reward-name').html(options[response[1]-1])
+        $('#myModal .modal-body #img-mod').attr('img/'+img_options[response[1]-1])
+        $('#myModal .modal-body .msg').html('Will be sent to ')
+        $('#myModal').modal('show')
+        krmn()
+    }
+    function krmn() {
+        var add_modal_content = `
+        <p class="msg-rmn">You have remaining tickets, wanna play again?</p>
+        <form action="/roulette/index" method="post">
+            {{ csrf_field() }}
+            <input type="hidden" name="master_play" value="{{$which_ticket->master_id}}">
+            <button class="btn-modal" type="submit">Play</button>
+        </form>
+        <form action="/roulette/ticket" method="get">
+            {{ csrf_field() }}
+            <input type="hidden" name="master_id" value="{{$which_ticket->master_id}}" placeholder="Enter Master ID">
+            <button class="btn-modal" type="submit">No</button>
+        </form>
+        // `;
+        $('#myModal .modal-body .inner-notif').html(add_modal_content)
+    }
+    </script>
+</body>
+</html>
