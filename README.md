@@ -1,2 +1,2 @@
 # random_rlte
-circular roulette inspired by codepen
+circular roulette source by codepen
